@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import platform
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 
 from aumai_nanoagent.models import AgentMessage, EdgeDevice, NanoAgentConfig
 
@@ -91,7 +91,7 @@ class NanoRuntime:
         response = AgentMessage(
             role="assistant",
             content=reply,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(tz=timezone.utc),
         )
         self._history.append(response)
         return response
